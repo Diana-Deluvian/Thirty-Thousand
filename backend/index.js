@@ -4,6 +4,7 @@ const cors = require("cors");
 const PORT = 4000;
 app.use(cors());
 require('dotenv').config();
+app.use(express.json());
 
 const mongoose = require("mongoose");
 
@@ -34,13 +35,23 @@ router.route("/").get(function(req, res) {
   });
 
 router.route("/addword").post(function(req, res) {
-    word.create( { word: "test", definition: "just a test", example: "yep,just a test" } );
+    word.create(req.body );
     res.send("worked");
 }
 )
 
 router.route("/getData").get(function(req, res) {
     word.find({}, function(err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(result);
+      }
+    });
+  });
+
+  router.route("/delete").get(function(req, res) {
+    word.deleteMany({}, function(err, result) {
       if (err) {
         res.send(err);
       } else {

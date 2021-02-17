@@ -12,7 +12,7 @@ let word = new Schema({
   example: {
     type: String
   },
-  moreInfo: {
+  additionalContext: {
     type: String
   }
 });

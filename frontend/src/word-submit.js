@@ -1,5 +1,6 @@
 import React from 'react';
 import './word-submit.css';
+import axios from 'axios';
 
 class NameForm extends React.Component {
     constructor(props) {
@@ -18,8 +19,15 @@ class NameForm extends React.Component {
     }
 
     handleSubmit(event) {
-      console.log(this.state);
+      alert(this.state);
       event.preventDefault();
+      axios.post("http://localhost:4000/addword", this.state)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   
     render() {
